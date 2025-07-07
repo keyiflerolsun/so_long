@@ -28,8 +28,7 @@ static int	is_playable(const char *line)
 {
 	while (*line)
 	{
-		if (*line != '1' && *line != '0' && *line != 'E' && *line != 'C'
-			&& *line != 'P' && *line != '\n')
+		if (!ft_strchr("10ECP\n", *line))
 			return (0);
 		line++;
 	}

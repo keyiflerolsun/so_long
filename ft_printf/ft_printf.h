@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:27:30 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/03 13:31:03 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/07 13:01:26 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define RED "\033[0;31m"
 # define MAGENTA "\033[0;35m"
 # define CYAN "\033[0;36m"
+# define BOLD "\033[1m"
 # define RESET "\033[0m"
 
 int	ft_printf(const char *format, ...);

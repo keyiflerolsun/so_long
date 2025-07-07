@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 19:03:45 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/07 10:27:22 by osancak          ###   ########.fr       */
+/*   Created: 2025/04/24 14:14:06 by osancak           #+#    #+#             */
+/*   Updated: 2025/06/15 18:25:01 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
+char	*ft_strdup(const char *s)
+{
+	char	*res;
+	int		s_len;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char *s1, char *s2, int which_free);
-
-#endif
+	s_len = ft_strlen(s);
+	res = malloc((s_len + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	res[s_len--] = '\0';
+	while (s_len >= 0)
+	{
+		res[s_len] = s[s_len];
+		s_len--;
+	}
+	return (res);
+}

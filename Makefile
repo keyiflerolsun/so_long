@@ -5,7 +5,7 @@ OFILES = $(addprefix $(OBJDIR)/, $(CFILES:.c=.o))
 
 NAME      = so_long
 CC        = cc
-CFLAGS    = -std=gnu11 -Wall -Wextra -Werror -Ilibft -Ift_printf -Iminilibx-linux -Iget_next_line -Isrc
+CFLAGS    = -Wall -Wextra -Werror -Ilibft -Ift_printf -Iminilibx-linux -Iget_next_line -Isrc
 MLX_FLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm
 
 MAKEFLAGS += --no-print-directory --silent

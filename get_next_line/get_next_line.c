@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 19:03:42 by osancak           #+#    #+#             */
-/*   Updated: 2025/06/17 09:47:33 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/07 12:19:41 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*ft_read(int fd, char *buff)
 		if (byte == -1)
 			return (free(tmp), free(buff), NULL);
 		tmp[byte] = '\0';
-		buff = ft_strjoin(buff, tmp);
+		buff = ft_strjoin(buff, tmp, 1);
 	}
 	free(tmp);
 	return (buff);
@@ -78,6 +78,8 @@ char	*get_next_line(int fd)
 	static char	*buff;
 	char		*line;
 
+	if (fd == -42)
+		return (free(buff), buff = NULL, NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buff)

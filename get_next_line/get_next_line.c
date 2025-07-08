@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd == -42)
-		return (free(buff), buff = NULL, NULL);
+		return (free(buff), NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buff)

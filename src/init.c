@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:54:39 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/07 16:52:57 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/08 22:27:11 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	init_player(t_player *player)
 static void	init_map(t_map *map)
 {
 	int	x;
-	int y;
+	int	y;
 
 	map->rows = 0;
-	map->columns = 0;
+	map->columns = ft_strlen((map->full)[0]);
 	map->coins = 0;
 	map->exit = 0;
 	map->players = 0;
@@ -37,8 +37,6 @@ static void	init_map(t_map *map)
 		y = -1;
 		while ((map->full)[x][++y])
 		{
-			if (x == 0 && (map->full)[x][y] == '1')
-				map->columns += 1;
 			if ((map->full)[x][y] == 'E')
 				map->exit += 1;
 			if ((map->full)[x][y] == 'C')
@@ -57,6 +55,12 @@ int	init_game(t_game *game, char *map_path)
 	game->map->full = read_map(game, map_path);
 	ft_printf("\n%s%s[~] Map is Loading..%s\n\n", YELLOW, BOLD, RESET);
 	init_map(game->map);
+	if (!validate_map_elements(game->map))
+	{
+		free_map(game->map);
+		free(game);
+		exit(EXIT_FAILURE);
+	}
 	i = -1;
 	while ((game->map->full)[++i])
 		ft_printf("%s%s%s\n", BLUE, (game->map->full)[i], RESET);

@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 10:15:46 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/07 16:16:35 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/08 22:27:13 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ static void	err_exit(t_game *game, char *lines, const char *message)
 	exit(EXIT_FAILURE);
 }
 
-static int	is_playable(const char *line)
-{
-	while (*line)
-	{
-		if (!ft_strchr("10ECP\n", *line))
-			return (0);
-		line++;
-	}
-	return (1);
-}
-
 static void	ft_read_file(t_game *game, char *path, char **line, char **lines)
 {
 	int	fd;
@@ -47,32 +36,17 @@ static void	ft_read_file(t_game *game, char *path, char **line, char **lines)
 		*line = get_next_line(fd);
 		if (!*line)
 			break ;
-		else if (**line == '\n' || !is_playable(*line))
+		else if (**line == '\n' || !is_valid_char(*line))
 		{
 			free(*line);
 			get_next_line(-42);
-			err_exit(game, *lines, "map is invalid");
+			err_exit(game, *lines, "map contains invalid characters");
 		}
 		*lines = ft_strjoin(*lines, *line, 3);
 	}
 	close(fd);
 	if (!**lines)
 		err_exit(game, *lines, "file is empty");
-}
-
-void	free_map(t_map *map)
-{
-	char **p_map;
-
-	p_map = map->full;
-	if (map && map->full)
-	{
-		while (*(map->full))
-			free(*(map->full)++);
-		free(p_map);
-	}
-	if (map)
-		free(map);
 }
 
 char	**read_map(t_game *game, char *map_path)
@@ -82,13 +56,18 @@ char	**read_map(t_game *game, char *map_path)
 	char	**res;
 
 	if (!ft_strnstr(map_path, ".ber"))
-		err_exit(game, NULL, "file not valid");
+		err_exit(game, NULL, "file extension must be .ber");
 	line = "";
 	lines = ft_strdup("");
 	if (!lines)
-		err_exit(game, lines, "memory problem from read_map");
+		err_exit(game, lines, "memory allocation failed in read_map");
 	ft_read_file(game, map_path, &line, &lines);
 	res = ft_split(lines, '\n');
 	free(lines);
+	if (!is_map_structure_valid(res))
+	{
+		free(res);
+		err_exit(game, NULL, "map structure is invalid");
+	}
 	return (res);
 }

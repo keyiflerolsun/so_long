@@ -5,7 +5,7 @@ OFILES = $(addprefix $(OBJDIR)/, $(CFILES:.c=.o))
 
 NAME   = so_long.a
 CC     = cc
-CFLAGS = -std=gnu11 -Wall -Wextra -Werror -I../libft -I../ft_printf -I../minilibx-linux -I../get_next_line
+CFLAGS = -std=c11 -Wall -Wextra -Werror -I../libft -I../ft_printf -I../minilibx-linux -I../get_next_line
 
 GREEN   = \033[0;32m
 YELLOW  = \033[0;33m

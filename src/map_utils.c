@@ -16,7 +16,7 @@ int	is_valid_char(const char *line)
 {
 	while (*line)
 	{
-		if (!ft_strchr("10ECP\n", *line))
+		if (!ft_strchr(VALID_MAP_CHARS, *line))
 			return (0);
 		line++;
 	}

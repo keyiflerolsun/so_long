@@ -18,6 +18,8 @@
 # include "mlx.h"
 # include "mlx_int.h"
 
+# define VALID_MAP_CHARS "10ECP\n"
+
 typedef struct s_player
 {
 	int			x;
@@ -44,8 +46,9 @@ typedef struct s_game
 	t_player	*player;
 }				t_game;
 
-char			**read_map(t_game *game, char *map_path);
+void			read_map(t_game *game, char *map_path);
 void			free_map(t_map *map);
+void			err_exit(const char *message, t_game *game);
 int				validate_map_elements(t_map *map);
 int				is_valid_char(const char *line);
 int				is_map_structure_valid(char **map);

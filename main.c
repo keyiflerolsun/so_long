@@ -12,18 +12,18 @@
 
 #include "so_long.h"
 
-static void	err_exit(const char *message, t_game *game)
+void	err_exit(const char *message, t_game *game)
 {
 	write(2, "\033[0;31m\033[1m[!] ERROR\t\033[0m\033[0;35m", 33);
 	while (*message)
 		write(2, message++, 1);
 	write(2, "\033[0m\n", 5);
-	if (game)
-	{
+	if (game && game->map)
 		free_map(game->map);
+	if (game && game->player)
 		free(game->player);
+	if (game)
 		free(game);
-	}
 	exit(EXIT_FAILURE);
 }
 

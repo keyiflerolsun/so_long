@@ -12,16 +12,11 @@
 
 #include "so_long.h"
 
-static void	err_exit(t_game *game, char *lines, const char *message)
+static void	cleanup_and_exit(t_game *game, char *lines, const char *message)
 {
-	free(lines);
-	write(2, "\033[0;31m\033[1mERROR : \033[0m\033[0;35m", 30);
-	while (*message)
-		write(2, message++, 1);
-	write(2, "\033[0m\n", 5);
-	free(game->map);
-	free(game);
-	exit(EXIT_FAILURE);
+	if (lines)
+		free(lines);
+	err_exit(message, game);
 }
 
 static void	ft_read_file(t_game *game, char *path, char **line, char **lines)
@@ -30,7 +25,7 @@ static void	ft_read_file(t_game *game, char *path, char **line, char **lines)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		err_exit(game, *lines, "file not found");
+		cleanup_and_exit(game, *lines, "file not found");
 	while (*line)
 	{
 		*line = get_next_line(fd);
@@ -40,34 +35,32 @@ static void	ft_read_file(t_game *game, char *path, char **line, char **lines)
 		{
 			free(*line);
 			get_next_line(-42);
-			err_exit(game, *lines, "map contains invalid characters");
+			cleanup_and_exit(game, *lines, "map contains invalid characters");
 		}
 		*lines = ft_strjoin(*lines, *line, 3);
 	}
 	close(fd);
 	if (!**lines)
-		err_exit(game, *lines, "file is empty");
+		cleanup_and_exit(game, *lines, "file is empty");
 }
 
-char	**read_map(t_game *game, char *map_path)
+void	read_map(t_game *game, char *map_path)
 {
 	char	*line;
 	char	*lines;
-	char	**res;
 
 	if (!ft_strnstr(map_path, ".ber"))
-		err_exit(game, NULL, "file extension must be .ber");
+		err_exit("file extension must be .ber", game);
 	line = "";
 	lines = ft_strdup("");
 	if (!lines)
-		err_exit(game, lines, "memory allocation failed in read_map");
+		err_exit("memory allocation failed in read_map", game);
 	ft_read_file(game, map_path, &line, &lines);
-	res = ft_split(lines, '\n');
+	game->map->full = ft_split(lines, '\n');
 	free(lines);
-	if (!is_map_structure_valid(res))
+	if (!is_map_structure_valid(game->map->full))
 	{
-		free(res);
-		err_exit(game, NULL, "map structure is invalid");
+		free(game->map->full);
+		err_exit("map structure is invalid", game);
 	}
-	return (res);
 }

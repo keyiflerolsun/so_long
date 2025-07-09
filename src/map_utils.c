@@ -66,17 +66,6 @@ int	is_map_structure_valid(char **map)
 	return (1);
 }
 
-int	validate_map_elements(t_map *map)
-{
-	if (map->players != 1)
-		return (ft_printf("%s%s[!] exactly 1 (P)%s\n", RED, BOLD, RESET), 0);
-	if (map->exit != 1)
-		return (ft_printf("%s%s[!] exactly 1 (E)%s\n", RED, BOLD, RESET), 0);
-	if (map->coins < 1)
-		return (ft_printf("%s%s[!] at least 1 (C)%s\n", RED, BOLD, RESET), 0);
-	return (1);
-}
-
 void	free_map(t_map *map)
 {
 	char	**p_map;

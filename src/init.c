@@ -55,8 +55,12 @@ int	init_game(t_game *game, char *map_path)
 	read_map(game, map_path);
 	ft_printf("\n%s%s[~] Map is Loading..%s\n\n", YELLOW, BOLD, RESET);
 	init_map(game->map);
-	if (!validate_map_elements(game->map))
-		err_exit("map elements validation failed", game);
+	if (game->map->players != 1)
+		err_exit("Map must have exactly 1 player (P)", game);
+	if (game->map->exit != 1)
+		err_exit("Map must have exactly 1 exit (E)", game);
+	if (game->map->coins < 1)
+		err_exit("Map must have at least 1 coin (C)", game);
 	i = -1;
 	while ((game->map->full)[++i])
 		ft_printf("%s%s%s\n", BLUE, (game->map->full)[i], RESET);

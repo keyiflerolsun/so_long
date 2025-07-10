@@ -1,4 +1,8 @@
-CFILES = read_map.c helpers.c init.c map_utils.c
+CFILES = read_map.c \
+		 map_utils.c \
+		 flood_fill.c \
+		 init_game.c \
+		 helpers.c
 
 OBJDIR = obj
 OFILES = $(addprefix $(OBJDIR)/, $(CFILES:.c=.o))

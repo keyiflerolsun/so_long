@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 22:15:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/07 16:55:38 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/09 16:34:24 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	err_exit(const char *message, t_game *game)
 		free_map(game->map);
 	if (game && game->player)
 		free(game->player);
+	if (game && game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	if (game)
 		free(game);
 	exit(EXIT_FAILURE);
@@ -46,7 +51,7 @@ static int	key_hook(int keycode, void *param)
 {
 	(void)param;
 	ft_printf("%s» Key : %s%d%s\n", MAGENTA, YELLOW, keycode, RESET);
-	if (keycode == XK_Escape)
+	if (keycode == XK_Escape || keycode == XK_Q || keycode == XK_q)
 		game_close(param);
 	return (1);
 }
@@ -61,7 +66,7 @@ int	main(int argc, char **argv)
 	if (!init_game(game, argv[1]))
 		err_exit("Game initialization failed!", game);
 	mahmut(game);
-	mlx_hook(game->win, DestroyNotify, 0, game_close, game);
+	mlx_hook(game->win, DestroyNotify, ButtonPressMask, game_close, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop(game->mlx);
 	return (0);

@@ -6,17 +6,17 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:13:47 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:15 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/09 14:29:39 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_valid_char(const char *line)
+int	is_valid_char(const char *line, const char *charset)
 {
 	while (*line)
 	{
-		if (!ft_strchr(VALID_MAP_CHARS, *line))
+		if (!ft_strchr(charset, *line))
 			return (0);
 		line++;
 	}
@@ -42,7 +42,7 @@ static int	check_map_borders(char **map, int rows, int cols)
 	return (1);
 }
 
-int	is_map_structure_valid(char **map)
+int	is_map_valid(char **map)
 {
 	int	rows;
 	int	cols;
@@ -68,14 +68,14 @@ int	is_map_structure_valid(char **map)
 
 void	free_map(t_map *map)
 {
-	char	**p_map;
+	char	**_map;
 
-	p_map = map->full;
+	_map = map->full;
 	if (map && map->full)
 	{
 		while (*(map->full))
 			free(*(map->full)++);
-		free(p_map);
+		free(_map);
 	}
 	if (map)
 		free(map);

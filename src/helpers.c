@@ -19,10 +19,10 @@ void	mahmut(t_game *game)
 
 	mlx_string_put(game->mlx, game->win, text_x, text_y, 0xFFFFFF, "Merhaba Mahmut");
 
-	ft_printf("\nmap->rows\t: %d\nmap->columns\t: %d\n", game->map->rows, game->map->columns);
-	ft_printf("map->coins\t: %d\nmap->exit\t: %d\n", game->map->coins, game->map->exit);
-	ft_printf("map->players\t: %d\n\n", game->map->players);
+	ft_printf("\nmap->rows\t: %d\nmap->columns\t: %d\n", game->map.rows, game->map.columns);
+	ft_printf("map->coins\t: %d\nmap->exit\t: %d\n", game->map.coins, game->map.exit);
+	ft_printf("map->players\t: %d\n\n", game->map.players);
 
-	ft_printf("player->row\t: %d\nplayer->column\t: %d\n", game->player->row, game->player->column);
-	ft_printf("player->step\t: %d\nplayer->score\t: %d\n\n", game->player->step, game->player->score);
+	ft_printf("player->row\t: %d\nplayer->column\t: %d\n", game->player.row, game->player.column);
+	ft_printf("player->step\t: %d\nplayer->score\t: %d\n\n", game->player.step, game->player.score);
 }

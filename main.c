@@ -18,10 +18,8 @@ void	err_exit(const char *message, t_game *game)
 	while (*message)
 		write(2, message++, 1);
 	write(2, "\033[0m\n", 5);
-	if (game && game->map)
-		free_map(game->map);
-	if (game && game->player)
-		free(game->player);
+	if (game && game->map.full)
+		free_map(&game->map);
 	if (game && game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
@@ -34,14 +32,13 @@ void	err_exit(const char *message, t_game *game)
 
 static int	game_close(t_game *game)
 {
-	free_map(game->map);
+	free_map(&game->map);
 	if (game->mlx && game->win)
 	{
 		mlx_destroy_window(game->mlx, game->win);
 		mlx_destroy_display(game->mlx);
 	}
 	free(game->mlx);
-	free(game->player);
 	free(game);
 	exit(EXIT_SUCCESS);
 	return (1);

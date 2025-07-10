@@ -56,8 +56,8 @@ void	read_map(t_game *game, char *map_path)
 	if (!lines)
 		err_exit("memory allocation failed in read_map", game);
 	ft_read_file(game, map_path, &lines);
-	game->map->full = ft_split(lines, '\n');
-	if (!is_map_valid(game->map->full))
+	game->map.full = ft_split(lines, '\n');
+	if (!is_map_valid(game->map.full))
 		map_exit(game, lines, "map structure is invalid");
 	free(lines);
 }

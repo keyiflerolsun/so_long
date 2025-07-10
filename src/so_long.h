@@ -45,8 +45,8 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	t_map		*map;
-	t_player	*player;
+	t_map		map;
+	t_player	player;
 }				t_game;
 
 void			read_map(t_game *game, char *map_path);

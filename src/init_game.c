@@ -26,16 +26,16 @@ static void	map_check(t_game *game)
 	int	w;
 	int	h;
 
-	if (game->map->players != 1)
+	if (game->map.players != 1)
 		err_exit("Map must have exactly 1 player (P)", game);
-	if (game->map->exit != 1)
+	if (game->map.exit != 1)
 		err_exit("Map must have exactly 1 exit (E)", game);
-	if (game->map->coins < 1)
+	if (game->map.coins < 1)
 		err_exit("Map must have at least 1 coin (C)", game);
-	if (!fill_check(game->map, game->player))
+	if (!fill_check(&game->map, &game->player))
 		err_exit("Map not Playable", game);
 	mlx_get_screen_size(game->mlx, &w, &h);
-	if (game->map->columns * 64 > (size_t)w || game->map->rows * 64 > (size_t)h)
+	if (game->map.columns * 64 > (size_t)w || game->map.rows * 64 > (size_t)h)
 		err_exit("Map is bigger than your screen", game);
 }
 
@@ -71,17 +71,15 @@ int	init_game(t_game *game, char *map_path)
 {
 	int	i;
 
-	game->map = ft_calloc(sizeof(t_map), 1);
-	game->player = ft_calloc(sizeof(t_player), 1);
 	read_map(game, map_path);
 	ft_printf("\n%s%s[~] Map Initializing..%s\n\n", YELLOW, BOLD, RESET);
 	game->mlx = mlx_init();
 	if (!(game->mlx))
 		return (0);
-	init_map(game, game->map, game->player);
+	init_map(game, &game->map, &game->player);
 	i = -1;
-	while ((game->map->full)[++i])
-		ft_printf("%s%s%s\n", BLUE, (game->map->full)[i], RESET);
+	while ((game->map.full)[++i])
+		ft_printf("%s%s%s\n", BLUE, (game->map.full)[i], RESET);
 	ft_printf("\n");
 	game->win = mlx_new_window(game->mlx, UI_W, UI_H, UI_TITLE);
 	if (!(game->win))

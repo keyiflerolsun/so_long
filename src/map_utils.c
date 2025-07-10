@@ -76,7 +76,6 @@ void	free_map(t_map *map)
 		while (*(map->full))
 			free(*(map->full)++);
 		free(_map);
+		map->full = NULL;
 	}
-	if (map)
-		free(map);
 }

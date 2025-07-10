@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:54:39 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/09 16:35:14 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/10 16:54:53 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static void	map_check(t_game *game)
 		err_exit("Map must have at least 1 coin (C)", game);
 	if (!fill_check(&game->map, &game->player))
 		err_exit("Map not Playable", game);
+	game->ui_x = game->map.columns * 64;
+	game->ui_y = game->map.rows * 64;
 	mlx_get_screen_size(game->mlx, &w, &h);
-	if (game->map.columns * 64 > (size_t)w || game->map.rows * 64 > (size_t)h)
+	if (game->ui_x > (size_t)w || game->ui_y > (size_t)h)
 		err_exit("Map is bigger than your screen", game);
 }
 
@@ -81,7 +83,7 @@ int	init_game(t_game *game, char *map_path)
 	while ((game->map.full)[++i])
 		ft_printf("%s%s%s\n", BLUE, (game->map.full)[i], RESET);
 	ft_printf("\n");
-	game->win = mlx_new_window(game->mlx, UI_W, UI_H, UI_TITLE);
+	game->win = mlx_new_window(game->mlx, game->ui_x, game->ui_y, UI_TITLE);
 	if (!(game->win))
 		return (0);
 	return (1);

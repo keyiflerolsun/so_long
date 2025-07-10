@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 10:15:46 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/09 14:41:32 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:13:35 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	map_exit(t_game *game, char *lines, const char *message)
 
 static void	ft_read_file(t_game *game, char *path, char **lines)
 {
-	char *line;
-	int	fd;
+	char	*line;
+	int		fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
@@ -49,8 +49,10 @@ static void	ft_read_file(t_game *game, char *path, char **lines)
 void	read_map(t_game *game, char *map_path)
 {
 	char	*lines;
+	char	*ber;
 
-	if (!ft_strnstr(map_path, ".ber"))
+	ber = ft_strnstr(map_path, ".ber");
+	if (!ber || ber[4] != '\0')
 		err_exit("file extension must be .ber", game);
 	lines = ft_strdup("");
 	if (!lines)

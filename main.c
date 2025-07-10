@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 22:15:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/09 16:34:24 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/10 17:10:07 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	err_exit(const char *message, t_game *game)
 		free_map(&game->map);
 	if (game && game->mlx)
 	{
+		mlx_destroy_window(game->mlx, game->win);
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
@@ -63,6 +64,8 @@ int	main(int argc, char **argv)
 	if (!init_game(game, argv[1]))
 		err_exit("Game initialization failed!", game);
 	mahmut(game);
+	if (!draw_walls(game))
+		err_exit("res/wall/*.xpm", game);
 	mlx_hook(game->win, DestroyNotify, ButtonPressMask, game_close, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop(game->mlx);

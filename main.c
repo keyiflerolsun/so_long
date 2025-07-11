@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 22:15:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 23:07:19 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 02:38:56 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	game_close(t_game *game)
 	destroy_walls(game);
 	destroy_gem(game);
 	destroy_player_frames(game);
+	destroy_door(game);
 	if (game->mlx)
 	{
 		if (game->win)

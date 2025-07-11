@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 22:12:11 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 23:03:53 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 02:38:09 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	can_move_to(t_game *game, int new_row, int new_col)
 	)
 		return (0);
 	if (game->map.full[new_row][new_col] == '1')
+		return (0);
+	if (game->map.full[new_row][new_col] == 'E' && game->map.coins > 0)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:07:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 12:24:57 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 13:08:05 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_game
 	size_t			ui_y;
 	t_player		player;
 	t_wall			wall;
-	void			*gem;
+	void			*gem_idle_frames[4];
 	void			*p_idle_frames[3];
 }					t_game;
 
@@ -75,13 +75,14 @@ int					fill_check(t_map *map, t_player *player);
 int					init_game(t_game *game, char *map_path);
 int					init_u_d(void *mlx, t_wall *wall);
 int					init_l_r(void *mlx, t_wall *wall);
-int					init_gem(void *mlx, void **gem);
+int					init_gem(void *mlx, void **frames);
 int					init_player_frames(void *mlx, void **frames);
 int					init_images(t_game *game);
 void				destroy_walls(t_game *game);
-void				*get_wall_image(t_game *game, int row, int col);
 void				destroy_gem(t_game *game);
 void				destroy_player_frames(t_game *game);
+void				*get_wall_image(t_game *game, int row, int col);
+void				*get_gem_idle_frame(t_game *game);
 void				*get_p_idle_frame(t_game *game);
 int					render(t_game *game);
 void				mahmut(t_game *game);

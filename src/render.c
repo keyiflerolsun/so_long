@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:15:52 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 12:27:24 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 13:12:35 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	put_images(t_game *game)
 			if (map[row][col] == '1')
 				img = get_wall_image(game, row, col);
 			else if (map[row][col] == 'C')
-				img = game->gem;
+				img = get_gem_idle_frame(game);
 			else if (map[row][col] == 'P')
 				img = get_p_idle_frame(game);
 			else
@@ -44,7 +44,7 @@ static void	put_images(t_game *game)
 int	init_images(t_game *game)
 {
 	if (
-		init_gem(game->mlx, &game->gem)
+		init_gem(game->mlx, game->gem_idle_frames)
 		&& init_player_frames(game->mlx, game->p_idle_frames)
 		&& init_u_d(game->mlx, &game->wall)
 		&& init_l_r(game->mlx, &game->wall)
@@ -52,7 +52,7 @@ int	init_images(t_game *game)
 		return (1);
 	destroy_walls(game);
 	destroy_gem(game);
-	destroy_gem(game);
+	destroy_player_frames(game);
 	return (0);
 }
 

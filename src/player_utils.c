@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 11:00:00 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 12:24:48 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:50:31 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	init_player_frames(void *mlx, void **frames)
 	int	px;
 
 	px = FT_PX;
-	frames[0] = mlx_xpm_file_to_image(mlx, "res/ply/idle1.xpm", &px, &px);
+	frames[0] = mlx_xpm_file_to_image(mlx, "res/ply/idle0.xpm", &px, &px);
 	if (!frames[0])
 		return (0);
-	frames[1] = mlx_xpm_file_to_image(mlx, "res/ply/idle2.xpm", &px, &px);
+	frames[1] = mlx_xpm_file_to_image(mlx, "res/ply/idle1.xpm", &px, &px);
 	if (!frames[1])
 		return (0);
-	frames[2] = mlx_xpm_file_to_image(mlx, "res/ply/idle3.xpm", &px, &px);
+	frames[2] = mlx_xpm_file_to_image(mlx, "res/ply/idle2.xpm", &px, &px);
 	if (!frames[2])
 		return (0);
 	return (1);
@@ -45,15 +45,13 @@ void	*get_p_idle_frame(t_game *game)
 {
 	static int	current_index = 0;
 	static int	call_counter = 0;
-	static int	calls_per_frame = 50;
-	static int	total_frames = 3;
 	void		*frame;
 
 	frame = game->p_idle_frames[current_index];
-	if (++call_counter >= calls_per_frame)
+	if (++call_counter >= 50)
 	{
 		call_counter = 0;
-		current_index = (current_index + 1) % total_frames;
+		current_index = (current_index + 1) % 3;
 	}
 	return (frame);
 }

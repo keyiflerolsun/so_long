@@ -3,7 +3,9 @@ CFILES = read_map.c \
 		 flood_fill.c \
 		 init_game.c \
 		 wall_utils.c \
+		 gem_utils.c \
 		 wall_draw.c \
+		 player_utils.c \
 		 helpers.c
 
 OBJDIR = obj

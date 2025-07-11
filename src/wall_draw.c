@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:15:52 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/10 17:17:43 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 10:25:05 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,16 @@ static void	put_walls(t_game *game)
 		while (map[row][++col])
 		{
 			if (map[row][col] == '1')
-			{
 				img = get_wall_image(game, row, col);
+			else if (map[row][col] == 'C')
+				img = game->gem;
+			else if (map[row][col] == 'P')
+				img = get_current_player_frame(game);
+			else
+				img = NULL;
+			if (img)
 				mlx_put_image_to_window(game->mlx, game->win, img, col * FT_PX,
 					row * FT_PX);
-			}
 		}
 	}
 }
@@ -84,10 +89,14 @@ int	draw_walls(t_game *game)
 	int	res;
 
 	res = 1;
-	if (init_u_d(game->mlx, &game->wall) && init_l_r(game->mlx, &game->wall))
+	if (init_gem(game->mlx, &game->gem) 
+		&& init_player_idle_frames(game)
+		&& init_u_d(game->mlx, &game->wall)
+		&& init_l_r(game->mlx, &game->wall))
 		put_walls(game);
 	else
 		res = 0;
 	destroy_walls(game);
+	destroy_gem(game);
 	return (res);
 }

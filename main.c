@@ -32,6 +32,18 @@ void	err_exit(const char *message, t_game *game)
 	exit(EXIT_FAILURE);
 }
 
+static int	game_loop(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	update_player_animation(game);
+	mlx_clear_window(game->mlx, game->win);
+	if (!draw_walls(game))
+		err_exit("res/wall/*.xpm", game);
+	return (0);
+}
+
 static int	game_close(t_game *game)
 {
 	free_map(&game->map);
@@ -70,6 +82,7 @@ int	main(int argc, char **argv)
 		err_exit("res/wall/*.xpm", game);
 	mlx_hook(game->win, DestroyNotify, ButtonPressMask, game_close, game);
 	mlx_key_hook(game->win, key_hook, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

@@ -5,6 +5,7 @@ CFILES = read_map.c \
 		 wall_utils.c \
 		 gem_utils.c \
 		 player_utils.c \
+		 move_utils.c \
 		 render.c \
 		 helpers.c
 

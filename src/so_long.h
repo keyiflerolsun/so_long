@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:07:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 13:08:05 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 23:07:43 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_game
 void				read_map(t_game *game, char *map_path);
 void				free_map(t_map *map);
 void				err_exit(const char *message, t_game *game);
+int					game_close(t_game *game);
 int					is_valid_char(const char *line, const char *charset);
 int					is_map_valid(char **map);
 int					fill_check(t_map *map, t_player *player);
@@ -86,5 +87,8 @@ void				*get_gem_idle_frame(t_game *game);
 void				*get_p_idle_frame(t_game *game);
 int					render(t_game *game);
 void				mahmut(t_game *game);
+int					can_move_to(t_game *game, int new_row, int new_col);
+void				collect_item(t_game *game, int row, int col);
+void				move_player(t_game *game, int new_row, int new_col);
 
 #endif

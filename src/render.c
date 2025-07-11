@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:15:52 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 13:12:35 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 23:06:19 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	put_images(t_game *game)
 			else
 				img = NULL;
 			if (img)
-				mlx_put_image_to_window(game->mlx, game->win, img, col * FT_PX,
-					row * FT_PX);
+				mlx_put_image_to_window(game->mlx, game->win,
+					img, col * FT_PX, row * FT_PX);
 		}
 	}
 }

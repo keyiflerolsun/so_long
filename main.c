@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 22:15:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 12:18:34 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 23:07:19 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	game_loop(t_game *game)
 	return (1);
 }
 
-static int	game_close(t_game *game)
+int	game_close(t_game *game)
 {
 	free_map(&game->map);
 	destroy_walls(game);
@@ -59,12 +59,18 @@ static int	game_close(t_game *game)
 	return (1);
 }
 
-static int	key_hook(int keycode, void *param)
+static int	key_hook(int keycode, t_game *game)
 {
-	(void)param;
-	ft_printf("%s» Key : %s%d%s\n", MAGENTA, YELLOW, keycode, RESET);
-	if (keycode == XK_Escape || keycode == XK_Q || keycode == XK_q)
-		game_close(param);
+	if (keycode == XK_q || keycode == XK_Escape)
+		game_close(game);
+	if (keycode == XK_w || keycode == XK_Up)
+		move_player(game, game->player.row - 1, game->player.column);
+	else if (keycode == XK_s || keycode == XK_Down)
+		move_player(game, game->player.row + 1, game->player.column);
+	else if (keycode == XK_a || keycode == XK_Left)
+		move_player(game, game->player.row, game->player.column - 1);
+	else if (keycode == XK_d || keycode == XK_Right)
+		move_player(game, game->player.row, game->player.column + 1);
 	return (1);
 }
 
@@ -78,8 +84,6 @@ int	main(int argc, char **argv)
 	if (!init_game(game, argv[1]))
 		err_exit("Game initialization failed!", game);
 	mahmut(game);
-	if (!init_images(game))
-		err_exit("res/wall/*.xpm", game);
 	mlx_hook(game->win, DestroyNotify, ButtonPressMask, game_close, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);

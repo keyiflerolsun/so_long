@@ -4,8 +4,8 @@ CFILES = read_map.c \
 		 init_game.c \
 		 wall_utils.c \
 		 gem_utils.c \
-		 wall_draw.c \
 		 player_utils.c \
+		 render.c \
 		 helpers.c
 
 OBJDIR = obj

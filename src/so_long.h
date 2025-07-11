@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:07:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 10:22:01 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:24:57 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ typedef struct s_player
 	unsigned int	column;
 	unsigned int	step;
 	unsigned int	score;
-	void			*idle_frames[3];
-	int				current_frame;
-	int				frame_counter;
 }					t_player;
 
 typedef struct s_map
@@ -66,6 +63,7 @@ typedef struct s_game
 	t_player		player;
 	t_wall			wall;
 	void			*gem;
+	void			*p_idle_frames[3];
 }					t_game;
 
 void				read_map(t_game *game, char *map_path);
@@ -75,15 +73,17 @@ int					is_valid_char(const char *line, const char *charset);
 int					is_map_valid(char **map);
 int					fill_check(t_map *map, t_player *player);
 int					init_game(t_game *game, char *map_path);
+int					init_u_d(void *mlx, t_wall *wall);
+int					init_l_r(void *mlx, t_wall *wall);
+int					init_gem(void *mlx, void **gem);
+int					init_player_frames(void *mlx, void **frames);
+int					init_images(t_game *game);
 void				destroy_walls(t_game *game);
 void				*get_wall_image(t_game *game, int row, int col);
-int					draw_walls(t_game *game);
-int					init_gem(void *mlx, void **gem);
 void				destroy_gem(t_game *game);
-int					init_player_idle_frames(t_game *game);
-void				update_player_animation(t_game *game);
 void				destroy_player_frames(t_game *game);
-void				*get_current_player_frame(t_game *game);
+void				*get_p_idle_frame(t_game *game);
+int					render(t_game *game);
 void				mahmut(t_game *game);
 
 #endif

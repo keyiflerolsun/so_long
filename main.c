@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 22:15:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/10 19:21:45 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:18:34 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ void	err_exit(const char *message, t_game *game)
 	exit(EXIT_FAILURE);
 }
 
-static int	game_loop(void *param)
+static int	game_loop(t_game *game)
 {
-	t_game	*game;
-
-	game = (t_game *)param;
-	update_player_animation(game);
+	usleep(2000);
 	mlx_clear_window(game->mlx, game->win);
-	if (!draw_walls(game))
+	if (!render(game))
 		err_exit("res/wall/*.xpm", game);
-	return (0);
+	return (1);
 }
 
 static int	game_close(t_game *game)
 {
 	free_map(&game->map);
+	destroy_walls(game);
+	destroy_gem(game);
+	destroy_player_frames(game);
 	if (game->mlx)
 	{
 		if (game->win)
@@ -78,7 +78,7 @@ int	main(int argc, char **argv)
 	if (!init_game(game, argv[1]))
 		err_exit("Game initialization failed!", game);
 	mahmut(game);
-	if (!draw_walls(game))
+	if (!init_images(game))
 		err_exit("res/wall/*.xpm", game);
 	mlx_hook(game->win, DestroyNotify, ButtonPressMask, game_close, game);
 	mlx_key_hook(game->win, key_hook, game);

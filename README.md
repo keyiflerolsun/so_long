@@ -4,7 +4,7 @@
 
 ## 📹 Demo Video
 
-[![so_long](https://raw.githubusercontent.com/keyiflerolsun/so_long/master/.github/so_long.mp4)](#)
+https://github.com/user-attachments/assets/9768efa4-4647-481f-8eb0-f4adddef1c29
 
 ## 🎯 Oyun Amacı
 

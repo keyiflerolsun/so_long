@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 22:15:56 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/12 02:38:56 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:24:18 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	game_loop(t_game *game)
 	usleep(2000);
 	mlx_clear_window(game->mlx, game->win);
 	if (!render(game))
-		err_exit("res/wall/*.xpm", game);
+		err_exit("textures/*/*.xpm", game);
 	return (1);
 }
 
@@ -48,6 +48,7 @@ int	game_close(t_game *game)
 	destroy_gem(game);
 	destroy_player_frames(game);
 	destroy_door(game);
+	destroy_enemy(game);
 	if (game->mlx)
 	{
 		if (game->win)
@@ -96,8 +97,7 @@ int	main(int argc, char **argv)
 	game = ft_calloc(sizeof(t_game), 1);
 	if (!init_game(game, argv[1]))
 		err_exit("Game initialization failed!", game);
-	mahmut(game);
-	mlx_hook(game->win, DestroyNotify, ButtonPressMask, game_close, game);
+	mlx_hook(game->win, DestroyNotify, KeyPressMask, game_close, game);
 	mlx_key_hook(game->win, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);

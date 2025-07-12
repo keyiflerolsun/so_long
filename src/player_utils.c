@@ -6,36 +6,24 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 11:00:00 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 12:50:31 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:17:39 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	init_ply_i_d_frames(void *mlx, void **i_f, void **u_f)
+int	init_ply_i_u_frames(void *mlx, void **i_f, void **u_f)
 {
 	int	px;
 
 	px = FT_PX;
-	i_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/idle0.xpm", &px, &px);
-	if (!i_f[0])
-		return (0);
-	i_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/idle1.xpm", &px, &px);
-	if (!i_f[1])
-		return (0);
-	i_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/idle2.xpm", &px, &px);
-	if (!i_f[2])
-		return (0);
-	u_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/u0.xpm", &px, &px);
-	if (!u_f[0])
-		return (0);
-	u_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/u1.xpm", &px, &px);
-	if (!u_f[1])
-		return (0);
-	u_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/u2.xpm", &px, &px);
-	if (!u_f[2])
-		return (0);
-	return (1);
+	i_f[0] = mlx_xpm_file_to_image(mlx, "textures/ply/idle0.xpm", &px, &px);
+	i_f[1] = mlx_xpm_file_to_image(mlx, "textures/ply/idle1.xpm", &px, &px);
+	i_f[2] = mlx_xpm_file_to_image(mlx, "textures/ply/idle2.xpm", &px, &px);
+	u_f[0] = mlx_xpm_file_to_image(mlx, "textures/ply/u0.xpm", &px, &px);
+	u_f[1] = mlx_xpm_file_to_image(mlx, "textures/ply/u1.xpm", &px, &px);
+	u_f[2] = mlx_xpm_file_to_image(mlx, "textures/ply/u2.xpm", &px, &px);
+	return (i_f[0] && i_f[1] && i_f[2] && u_f[0] && u_f[1] && u_f[2]);
 }
 
 int	init_ply_l_r_frames(void *mlx, void **l_f, void **r_f)
@@ -43,25 +31,13 @@ int	init_ply_l_r_frames(void *mlx, void **l_f, void **r_f)
 	int	px;
 
 	px = FT_PX;
-	l_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/l0.xpm", &px, &px);
-	if (!l_f[0])
-		return (0);
-	l_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/l1.xpm", &px, &px);
-	if (!l_f[1])
-		return (0);
-	l_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/l2.xpm", &px, &px);
-	if (!l_f[2])
-		return (0);
-	r_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/r0.xpm", &px, &px);
-	if (!r_f[0])
-		return (0);
-	r_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/r1.xpm", &px, &px);
-	if (!r_f[1])
-		return (0);
-	r_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/r2.xpm", &px, &px);
-	if (!r_f[2])
-		return (0);
-	return (1);
+	l_f[0] = mlx_xpm_file_to_image(mlx, "textures/ply/l0.xpm", &px, &px);
+	l_f[1] = mlx_xpm_file_to_image(mlx, "textures/ply/l1.xpm", &px, &px);
+	l_f[2] = mlx_xpm_file_to_image(mlx, "textures/ply/l2.xpm", &px, &px);
+	r_f[0] = mlx_xpm_file_to_image(mlx, "textures/ply/r0.xpm", &px, &px);
+	r_f[1] = mlx_xpm_file_to_image(mlx, "textures/ply/r1.xpm", &px, &px);
+	r_f[2] = mlx_xpm_file_to_image(mlx, "textures/ply/r2.xpm", &px, &px);
+	return (l_f[0] && l_f[1] && l_f[2] && r_f[0] && r_f[1] && r_f[2]);
 }
 
 void	destroy_player_frames(t_game *game)

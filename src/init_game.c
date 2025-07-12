@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:54:39 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/11 23:20:38 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:24:18 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int	init_game(t_game *game, char *map_path)
 	init_map(game, &game->map, &game->player);
 	i = -1;
 	while ((game->map.full)[++i])
-		ft_printf("%s%s%s\n", BLUE, (game->map.full)[i], RESET);
+		ft_printf("%s%s%s\n", MAGENTA, (game->map.full)[i], RESET);
 	ft_printf("\n");
 	if (!init_images(game))
-		err_exit("res/wall/*.xpm", game);
+		err_exit("textures/*/*.xpm", game);
 	game->win = mlx_new_window(game->mlx, game->ui_x, game->ui_y, UI_TITLE);
 	if (!(game->win))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 13:44:55 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/10 14:22:35 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 19:20:25 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	**duplicate_map(char **map)
 
 static void	fill_map(char **map, int row, int column)
 {
-	if (ft_strchr("1*", map[row][column]))
+	if (ft_strchr("1*X", map[row][column]))
 		return ;
 	map[row][column] = '*';
 	fill_map(map, row + 1, column);
@@ -50,7 +50,7 @@ int	fill_check(t_map *map, t_player *player)
 	i = -1;
 	while (dup[++i])
 	{
-		if (!is_valid_char(dup[i], "01*"))
+		if (!is_valid_char(dup[i], "01*X"))
 		{
 			res = 0;
 			break ;

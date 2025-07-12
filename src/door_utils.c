@@ -41,7 +41,7 @@ void	*get_door_frame(t_game *game)
 	static int	frame_counter = 0;
 	static int	animation_delay = 0;
 
-	if (game->player.score < game->map.coins)
+	if (game->map.coins > 0)
 		return (game->door._c);
 	animation_delay++;
 	if (animation_delay >= 80)

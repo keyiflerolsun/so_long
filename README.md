@@ -71,7 +71,7 @@ make re       # Her şeyi yeniden derle
 
 ```
 so_long/
-├── src/                    # Kaynak kod dosyaları
+├── src/                   # Kaynak kod dosyaları
 │   ├── so_long.h          # Ana başlık dosyası
 │   ├── init_game.c        # Oyun başlatma
 │   ├── render.c           # Render fonksiyonları
@@ -83,21 +83,21 @@ so_long/
 │   ├── door_utils.c       # Çıkış kapısı mantığı
 │   ├── wall_utils.c       # Duvar render
 │   └── text_utils.c       # UI metin render
-├── maps/                   # Oyun haritaları
+├── maps/                  # Oyun haritaları
 │   ├── default.ber        # Temel seviye
-│   ├── big.ber           # Büyük seviye
-│   └── *.ber             # Çeşitli test haritaları
+│   ├── big.ber            # Büyük seviye
+│   └── *.ber              # Çeşitli test haritaları
 ├── textures/              # Oyun sprite'ları
-│   ├── wall/             # Duvar dokuları
-│   ├── ply/              # Oyuncu animasyonları
-│   ├── gem/              # Mücevher animasyonları
-│   ├── door/             # Kapı durumları
-│   └── enemy/            # Düşman sprite'ları
+│   ├── wall/              # Duvar dokuları
+│   ├── ply/               # Oyuncu animasyonları
+│   ├── gem/               # Mücevher animasyonları
+│   ├── door/              # Kapı durumları
+│   └── enemy/             # Düşman sprite'ları
 ├── libft/                 # Özel C kütüphanesi
-├── ft_printf/            # Özel printf uygulaması
-├── get_next_line/        # Dosya okuma yardımcısı
-├── minilibx-linux/       # Grafik kütüphanesi
-└── main.c                # Giriş noktası
+├── ft_printf/             # Özel printf uygulaması
+├── get_next_line/         # Dosya okuma yardımcısı
+├── minilibx-linux/        # Grafik kütüphanesi
+└── main.c                 # Giriş noktası
 ```
 
 ## 🎨 Özellikler

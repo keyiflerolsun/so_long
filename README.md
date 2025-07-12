@@ -12,7 +12,7 @@ Oyuncu şunları yapmalıdır:
 - 🏃 Ok tuşları veya WASD kullanarak harita üzerinde gezinmek
 - 💎 Seviye boyunca dağılmış tüm mücevherleri (C) toplamak
 - 🚪 Tüm mücevherleri topladıktan sonra çıkış kapısına (E) ulaşmak
-- ⚠️ Bölgede devriye gezen düşmanlardan (X) kaçınmak
+- ⚠️ Bölgede bulunan düşmanlardan (X) kaçınmak
 - 📈 Seviyeyi minimum adımla tamamlamak
 
 ## 🎮 Kontroller

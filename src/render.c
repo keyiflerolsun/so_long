@@ -6,7 +6,7 @@
 /*   By: osancak <osancak@student.42istanbul.com.tr +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:15:52 by osancak           #+#    #+#             */
-/*   Updated: 2025/07/12 02:38:24 by osancak          ###   ########.fr       */
+/*   Updated: 2025/07/12 03:13:33 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*get_tile_image(t_game *game, char tile, int row, int col)
 	else if (tile == 'C')
 		return (get_gem_idle_frame(game));
 	else if (tile == 'P')
-		return (get_p_idle_frame(game));
+		return (get_player_frame(game));
 	else if (tile == 'E')
 		return (get_door_frame(game));
 	return (NULL);
@@ -49,11 +49,19 @@ static void	put_images(t_game *game)
 
 static int	init_all_assets(t_game *game)
 {
-	return (init_gem(game->mlx, game->gem_idle_frames)
-		&& init_player_frames(game->mlx, game->p_idle_frames)
-		&& init_door(game->mlx, &game->door)
-		&& init_u_d(game->mlx, &game->wall)
-		&& init_l_r(game->mlx, &game->wall));
+	if (!init_gem(game->mlx, game->gem_i_f))
+		return (0);
+	if (!init_ply_i_d_frames(game->mlx, game->ply_i_f, game->ply_u_f))
+		return (0);
+	if (!init_ply_l_r_frames(game->mlx, game->ply_l_f, game->ply_r_f))
+		return (0);
+	if (!init_door(game->mlx, &game->door))
+		return (0);
+	if (!init_w_u_d(game->mlx, &game->wall))
+		return (0);
+	if (!init_w_l_r(game->mlx, &game->wall))
+		return (0);
+	return (1);
 }
 
 int	init_images(t_game *game)

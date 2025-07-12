@@ -65,13 +65,25 @@ static int	key_hook(int keycode, t_game *game)
 	if (keycode == XK_q || keycode == XK_Escape)
 		game_close(game);
 	if (keycode == XK_w || keycode == XK_Up)
+	{
+		game->player.direction = DIR_UP;
 		move_player(game, game->player.row - 1, game->player.column);
+	}
 	else if (keycode == XK_s || keycode == XK_Down)
+	{
+		game->player.direction = DIR_DOWN;
 		move_player(game, game->player.row + 1, game->player.column);
+	}
 	else if (keycode == XK_a || keycode == XK_Left)
+	{
+		game->player.direction = DIR_LEFT;
 		move_player(game, game->player.row, game->player.column - 1);
+	}
 	else if (keycode == XK_d || keycode == XK_Right)
+	{
+		game->player.direction = DIR_RIGHT;
 		move_player(game, game->player.row, game->player.column + 1);
+	}
 	return (1);
 }
 

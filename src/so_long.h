@@ -22,6 +22,11 @@
 # define UI_TITLE "so_long"
 # define FT_PX 64
 
+# define DIR_DOWN 0
+# define DIR_LEFT 1
+# define DIR_RIGHT 2
+# define DIR_UP 3
+
 typedef struct s_wall
 {
 	void			*block;
@@ -47,6 +52,7 @@ typedef struct s_player
 	unsigned int	column;
 	unsigned int	step;
 	unsigned int	score;
+	int				direction;
 }					t_player;
 
 typedef struct s_map
@@ -69,8 +75,11 @@ typedef struct s_game
 	t_player		player;
 	t_wall			wall;
 	t_door			door;
-	void			*gem_idle_frames[4];
-	void			*p_idle_frames[3];
+	void			*gem_i_f[4];
+	void			*ply_i_f[3];
+	void			*ply_l_f[3];
+	void			*ply_r_f[3];
+	void			*ply_u_f[3];
 }					t_game;
 
 void				read_map(t_game *game, char *map_path);
@@ -81,10 +90,11 @@ int					is_valid_char(const char *line, const char *charset);
 int					is_map_valid(char **map);
 int					fill_check(t_map *map, t_player *player);
 int					init_game(t_game *game, char *map_path);
-int					init_u_d(void *mlx, t_wall *wall);
-int					init_l_r(void *mlx, t_wall *wall);
+int					init_w_u_d(void *mlx, t_wall *wall);
+int					init_w_l_r(void *mlx, t_wall *wall);
 int					init_gem(void *mlx, void **frames);
-int					init_player_frames(void *mlx, void **frames);
+int					init_ply_i_d_frames(void *mlx, void **i_f, void **u_f);
+int					init_ply_l_r_frames(void *mlx, void **l_f, void **r_f);
 int					init_door(void *mlx, t_door *door);
 int					init_images(t_game *game);
 void				destroy_walls(t_game *game);
@@ -93,7 +103,7 @@ void				destroy_player_frames(t_game *game);
 void				destroy_door(t_game *game);
 void				*get_wall_image(t_game *game, int row, int col);
 void				*get_gem_idle_frame(t_game *game);
-void				*get_p_idle_frame(t_game *game);
+void				*get_player_frame(t_game *game);
 void				*get_door_frame(t_game *game);
 int					render(t_game *game);
 void				mahmut(t_game *game);

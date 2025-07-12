@@ -39,8 +39,8 @@ void	destroy_gem(t_game *game)
 	i = -1;
 	while (++i < 4)
 	{
-		if (game->gem_idle_frames[i])
-			mlx_destroy_image(game->mlx, game->gem_idle_frames[i]);
+		if (game->gem_i_f[i])
+			mlx_destroy_image(game->mlx, game->gem_i_f[i]);
 	}
 }
 
@@ -58,6 +58,6 @@ void	*get_gem_idle_frame(t_game *game)
 		if (current_index == 3 || current_index == 0)
 			direction *= -1;
 	}
-	frame = game->gem_idle_frames[current_index];
+	frame = game->gem_i_f[current_index];
 	return (frame);
 }

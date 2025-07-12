@@ -19,6 +19,7 @@ static void	init_player(t_player *player, t_map *map, int row, int column)
 	player->column = column;
 	player->step = 0;
 	player->score = 0;
+	player->direction = DIR_DOWN;
 }
 
 static void	map_check(t_game *game)

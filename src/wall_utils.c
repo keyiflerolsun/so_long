@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	init_u_d(void *mlx, t_wall *wall)
+int	init_w_u_d(void *mlx, t_wall *wall)
 {
 	int	px;
 
@@ -38,7 +38,7 @@ int	init_u_d(void *mlx, t_wall *wall)
 	return (1);
 }
 
-int	init_l_r(void *mlx, t_wall *wall)
+int	init_w_l_r(void *mlx, t_wall *wall)
 {
 	int	px;
 

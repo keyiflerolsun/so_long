@@ -12,19 +12,54 @@
 
 #include "so_long.h"
 
-int	init_player_frames(void *mlx, void **frames)
+int	init_ply_i_d_frames(void *mlx, void **i_f, void **u_f)
 {
 	int	px;
 
 	px = FT_PX;
-	frames[0] = mlx_xpm_file_to_image(mlx, "res/ply/idle0.xpm", &px, &px);
-	if (!frames[0])
+	i_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/idle0.xpm", &px, &px);
+	if (!i_f[0])
 		return (0);
-	frames[1] = mlx_xpm_file_to_image(mlx, "res/ply/idle1.xpm", &px, &px);
-	if (!frames[1])
+	i_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/idle1.xpm", &px, &px);
+	if (!i_f[1])
 		return (0);
-	frames[2] = mlx_xpm_file_to_image(mlx, "res/ply/idle2.xpm", &px, &px);
-	if (!frames[2])
+	i_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/idle2.xpm", &px, &px);
+	if (!i_f[2])
+		return (0);
+	u_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/u0.xpm", &px, &px);
+	if (!u_f[0])
+		return (0);
+	u_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/u1.xpm", &px, &px);
+	if (!u_f[1])
+		return (0);
+	u_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/u2.xpm", &px, &px);
+	if (!u_f[2])
+		return (0);
+	return (1);
+}
+
+int	init_ply_l_r_frames(void *mlx, void **l_f, void **r_f)
+{
+	int	px;
+
+	px = FT_PX;
+	l_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/l0.xpm", &px, &px);
+	if (!l_f[0])
+		return (0);
+	l_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/l1.xpm", &px, &px);
+	if (!l_f[1])
+		return (0);
+	l_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/l2.xpm", &px, &px);
+	if (!l_f[2])
+		return (0);
+	r_f[0] = mlx_xpm_file_to_image(mlx, "res/ply/r0.xpm", &px, &px);
+	if (!r_f[0])
+		return (0);
+	r_f[1] = mlx_xpm_file_to_image(mlx, "res/ply/r1.xpm", &px, &px);
+	if (!r_f[1])
+		return (0);
+	r_f[2] = mlx_xpm_file_to_image(mlx, "res/ply/r2.xpm", &px, &px);
+	if (!r_f[2])
 		return (0);
 	return (1);
 }
@@ -36,18 +71,33 @@ void	destroy_player_frames(t_game *game)
 	i = -1;
 	while (++i < 3)
 	{
-		if (game->p_idle_frames[i])
-			mlx_destroy_image(game->mlx, game->p_idle_frames[i]);
+		if (game->ply_i_f[i])
+			mlx_destroy_image(game->mlx, game->ply_i_f[i]);
+		if (game->ply_l_f[i])
+			mlx_destroy_image(game->mlx, game->ply_l_f[i]);
+		if (game->ply_r_f[i])
+			mlx_destroy_image(game->mlx, game->ply_r_f[i]);
+		if (game->ply_u_f[i])
+			mlx_destroy_image(game->mlx, game->ply_u_f[i]);
 	}
 }
 
-void	*get_p_idle_frame(t_game *game)
+void	*get_player_frame(t_game *game)
 {
 	static int	current_index = 0;
 	static int	call_counter = 0;
 	void		*frame;
+	void		**frames;
 
-	frame = game->p_idle_frames[current_index];
+	if (game->player.direction == DIR_LEFT)
+		frames = game->ply_l_f;
+	else if (game->player.direction == DIR_RIGHT)
+		frames = game->ply_r_f;
+	else if (game->player.direction == DIR_UP)
+		frames = game->ply_u_f;
+	else
+		frames = game->ply_i_f;
+	frame = frames[current_index];
 	if (++call_counter >= 50)
 	{
 		call_counter = 0;
